@@ -1,9 +1,6 @@
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- Set quick command for opening file explorer
-vim.keymap.set('n', '<C-e>', '<cmd>Neotree filesystem reveal right<CR>')
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -14,6 +11,10 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- Commands to move lines up and down
 vim.keymap.set('n', '<C-j>', ':m .+1<CR>==')
 vim.keymap.set('n', '<C-k>', ':m .-2<CR>==')
+
+-- Bind C-c and C-v to copy and paste
+vim.keymap.set('v', '<C-c>', '"+y', { desc = 'Copy selected text' })
+vim.keymap.set('n', '<C-v>', '"+p', { desc = 'Paste copied text' })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })

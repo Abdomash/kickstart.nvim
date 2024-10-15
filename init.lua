@@ -3,6 +3,7 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
+vim.g.termguicolors = true
 
 -- [[ Load my configs ]]
 require 'abdo.options'
@@ -69,6 +70,9 @@ require('lazy').setup({
   -- Autocompletion
   require 'abdo.plugins.nvim-cmp',
 
+  -- Highlight colors in hex, rgb, etc
+  -- 'chrisbra/Colorizer',
+
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
@@ -92,14 +96,11 @@ require('lazy').setup({
   -- Highlight, edit, and navigate code
   require 'abdo.plugins.treesitter',
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-
+  -- TODO: configure and move to abdo folder
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -121,3 +122,5 @@ require('lazy').setup({
     },
   },
 })
+
+vim.cmd('colorscheme ' .. vim.g.colorscheme)
