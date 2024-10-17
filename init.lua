@@ -19,9 +19,6 @@ vim.opt.rtp:prepend(lazypath)
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
 
-  -- Multi Line Cursor (Similar to Ctrl-D in V*Code)
-  'mg979/vim-visual-multi',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
