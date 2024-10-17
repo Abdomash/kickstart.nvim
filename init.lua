@@ -5,11 +5,6 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 vim.g.termguicolors = true
 
--- [[ Load my configs ]]
-require 'abdo.options'
-require 'abdo.remap'
-require 'abdo.autocmd'
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -122,5 +117,10 @@ require('lazy').setup({
     },
   },
 })
+
+-- [[ Load my configs ]]
+require 'abdo.options'
+require 'abdo.remap'
+require 'abdo.autocmd'
 
 vim.cmd('colorscheme ' .. vim.g.colorscheme)
