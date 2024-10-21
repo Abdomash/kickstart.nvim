@@ -31,7 +31,7 @@ return {
       local onedark = require 'onedark'
       onedark.setup {
         style = 'dark',
-        transparent = true,
+        transparent = false,
         code_style = {
           comments = 'none',
           keywords = 'none',
