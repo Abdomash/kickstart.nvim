@@ -22,6 +22,12 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Add status line to the bottom of the screen
+  'nvim-lualine/lualine.nvim',
+
+  -- Learn vim
+  -- 'ThePrimeagen/vim-be-good',
+
   -- Custom colorscheme
   require 'abdo.colors',
 
@@ -91,11 +97,12 @@ require('lazy').setup({
   -- Highlight, edit, and navigate code
   require 'abdo.plugins.treesitter',
 
-  -- TODO: configure and move to abdo folder
-  require 'kickstart.plugins.debug',
-  require 'kickstart.plugins.indent_line',
-  require 'kickstart.plugins.lint',
-  require 'kickstart.plugins.autopairs',
+  -- Debugger ( Don't need it )
+  -- require 'abdo.plugins.debug',
+
+  require 'abdo.plugins.indent_line',
+  require 'abdo.plugins.lint',
+  require 'abdo.plugins.autopairs',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
