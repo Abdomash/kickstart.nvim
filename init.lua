@@ -28,14 +28,19 @@ require('lazy').setup({
   -- Learn vim
   -- 'ThePrimeagen/vim-be-good',
 
+  -- Toggle Comment/Uncomment
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    opts = {
+      enable_autocmd = false,
+    },
+  },
+
   -- Custom colorscheme
   require 'abdo.colors',
 
   -- File Explorer
   require 'abdo.plugins.neo-tree',
-
-  -- Toggle Comments
-  'tpope/vim-commentary',
 
   -- Copilot
   'github/copilot.vim',
@@ -129,5 +134,11 @@ require('lazy').setup({
 require 'abdo.options'
 require 'abdo.remap'
 require 'abdo.autocmd'
+
+-- Override `commentstring` to use `nvim-ts-context-commentstring`
+local get_option = vim.filetype.get_option
+vim.filetype.get_option = function(filetype, option)
+  return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
+end
 
 vim.cmd('colorscheme ' .. vim.g.colorscheme)

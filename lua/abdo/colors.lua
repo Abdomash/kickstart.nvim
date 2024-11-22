@@ -1,5 +1,5 @@
 -- Set the colorscheme
-vim.g.colorscheme = 'onedark'
+vim.g.colorscheme = 'rose-pine'
 
 return {
   {
@@ -20,10 +20,6 @@ return {
     end,
   },
 
-  'bluz71/vim-moonfly-colors',
-  'rebelot/kanagawa.nvim',
-  'folke/tokyonight.nvim',
-  'catppuccin/nvim',
   {
     'navarasu/onedark.nvim',
 
@@ -43,12 +39,20 @@ return {
           background = false,
         },
       }
+      onedark.load()
       require('lualine').setup {
         options = {
           theme = vim.g.colorscheme,
         },
       }
-      onedark.load()
     end,
   },
+
+  { 'rose-pine/neovim', name = 'rose-pine' },
+
+  'sainnhe/sonokai',
+  'bluz71/vim-moonfly-colors',
+  'rebelot/kanagawa.nvim',
+  'folke/tokyonight.nvim',
+  'catppuccin/nvim',
 }
