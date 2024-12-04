@@ -1,9 +1,10 @@
--- NOTE: Must happen before plugins are loaded
 -- [[ Global settings ]]
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 vim.g.termguicolors = true
+vim.g.colorscheme = 'kanagawa'
+vim.g.transparent_bg = false
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -22,37 +23,34 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- Add status line to the bottom of the screen
-  'nvim-lualine/lualine.nvim',
-
-  -- Learn vim
-  -- 'ThePrimeagen/vim-be-good',
-
   -- Toggle Comment/Uncomment
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
     opts = {
       enable_autocmd = false,
     },
+    setup = function()
+      local get_option = vim.filetype.get_option
+      vim.filetype.get_option = function(filetype, option)
+        return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
+      end
+    end,
   },
 
-  -- Custom colorscheme
-  require 'abdo.colors',
+  -- Transparent background global toggle
+  'xiyaowong/transparent.nvim',
 
-  -- File Explorer
-  require 'abdo.plugins.neo-tree',
-
-  -- Copilot
+  -- Tmux & Neovim integration
+  {
+    'christoomey/vim-tmux-navigator',
+    keys = {
+      '<C-h>',
+      '<C-j>',
+      '<C-k>',
+      '<C-l>',
+    },
+  },
   'github/copilot.vim',
-
-  -- Git Signs
-  require 'abdo.plugins.gitsigns',
-
-  -- Pending Keybinds.
-  require 'abdo.plugins.which-key',
-
-  -- Fuzzy Finder (files, lsp, etc)
-  require 'abdo.plugins.telescope',
 
   -- LSP Plugins
   {
@@ -66,18 +64,6 @@ require('lazy').setup({
     },
   },
   { 'Bilal2453/luvit-meta', lazy = true },
-
-  -- Main LSP Configuration
-  require 'abdo.plugins.lsp-config',
-
-  -- Autoformat
-  require 'abdo.plugins.conform',
-
-  -- Autocompletion
-  require 'abdo.plugins.nvim-cmp',
-
-  -- Highlight colors in hex, rgb, etc
-  -- 'chrisbra/Colorizer',
 
   -- Highlight todo, notes, etc in comments
   {
@@ -96,15 +82,26 @@ require('lazy').setup({
     requires = { 'nvim-lua/plenary.nvim' },
   },
 
-  -- Collection of various small independent plugins/modules
+  -- Markdown Preview
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
+
+  require 'abdo.colors',
+  require 'abdo.plugins.lualine',
+  require 'abdo.plugins.neo-tree',
+  require 'abdo.plugins.gitsigns',
+  require 'abdo.plugins.which-key',
+  require 'abdo.plugins.telescope',
+  require 'abdo.plugins.lsp-config',
+  require 'abdo.plugins.conform',
+  require 'abdo.plugins.nvim-cmp',
   require 'abdo.plugins.mini',
-
-  -- Highlight, edit, and navigate code
   require 'abdo.plugins.treesitter',
-
-  -- Debugger ( Don't need it )
-  -- require 'abdo.plugins.debug',
-
   require 'abdo.plugins.indent_line',
   require 'abdo.plugins.lint',
   require 'abdo.plugins.autopairs',
@@ -135,10 +132,5 @@ require 'abdo.options'
 require 'abdo.remap'
 require 'abdo.autocmd'
 
--- Override `commentstring` to use `nvim-ts-context-commentstring`
-local get_option = vim.filetype.get_option
-vim.filetype.get_option = function(filetype, option)
-  return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
-end
-
 vim.cmd('colorscheme ' .. vim.g.colorscheme)
+vim.cmd('Transparent' .. (vim.g.transparent_bg and 'Enable' or 'Disable'))

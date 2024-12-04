@@ -1,13 +1,9 @@
--- Set the colorscheme
-vim.g.colorscheme = 'rose-pine'
-
 return {
   {
     'Mofiqul/dracula.nvim',
     config = function()
       local dracula = require 'dracula'
       dracula.setup {
-        -- transparent_bg = true,
         -- colors = {
         --   bg = '#000000',
         --   visual = '#1b1a2b',
@@ -27,7 +23,6 @@ return {
       local onedark = require 'onedark'
       onedark.setup {
         style = 'dark',
-        transparent = false,
         code_style = {
           comments = 'none',
           keywords = 'none',
@@ -40,15 +35,20 @@ return {
         },
       }
       onedark.load()
-      require('lualine').setup {
-        options = {
-          theme = vim.g.colorscheme,
+    end,
+  },
+
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    config = function()
+      require('rose-pine').setup {
+        styles = {
+          italic = false,
         },
       }
     end,
   },
-
-  { 'rose-pine/neovim', name = 'rose-pine' },
 
   'sainnhe/sonokai',
   'bluz71/vim-moonfly-colors',
