@@ -19,9 +19,8 @@ vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
 require('lazy').setup({
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'folke/which-key.nvim', -- Show keybindings
 
   -- Toggle Comment/Uncomment
   {
@@ -37,18 +36,10 @@ require('lazy').setup({
     end,
   },
 
-  -- Transparent background global toggle
-  'xiyaowong/transparent.nvim',
-
   -- Tmux & Neovim integration
   {
     'christoomey/vim-tmux-navigator',
-    keys = {
-      '<C-h>',
-      '<C-j>',
-      '<C-k>',
-      '<C-l>',
-    },
+    keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' },
   },
   'github/copilot.vim',
 
@@ -82,27 +73,15 @@ require('lazy').setup({
     requires = { 'nvim-lua/plenary.nvim' },
   },
 
-  -- Markdown Preview
-  {
-    'MeanderingProgrammer/render-markdown.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
-    ---@module 'render-markdown'
-    ---@type render.md.UserConfig
-    opts = {},
-  },
-
   require 'abdo.colors',
-  require 'abdo.plugins.lualine',
   require 'abdo.plugins.neo-tree',
   require 'abdo.plugins.gitsigns',
-  require 'abdo.plugins.which-key',
   require 'abdo.plugins.telescope',
   require 'abdo.plugins.lsp-config',
   require 'abdo.plugins.conform',
   require 'abdo.plugins.nvim-cmp',
   require 'abdo.plugins.mini',
   require 'abdo.plugins.treesitter',
-  require 'abdo.plugins.indent_line',
   require 'abdo.plugins.lint',
   require 'abdo.plugins.autopairs',
 }, {
