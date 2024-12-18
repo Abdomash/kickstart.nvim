@@ -1,4 +1,27 @@
 return {
+  -- LSP Plugins
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- Load luvit types when the `vim.uv` word is found
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
+  { 'Bilal2453/luvit-meta', lazy = true },
+
+  -- Utility tool for LSPs
+  {
+    'nvimtools/none-ls.nvim',
+    config = function()
+      require('null-ls').setup()
+    end,
+    requires = { 'nvim-lua/plenary.nvim' },
+  },
+
+  -- This plugin is the main configuration for LSP in Neovim
   {
     'neovim/nvim-lspconfig',
     -- Main LSP Configuration

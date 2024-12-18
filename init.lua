@@ -21,56 +21,12 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'folke/which-key.nvim', -- Show keybindings
-
-  -- Toggle Comment/Uncomment
-  {
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    opts = {
-      enable_autocmd = false,
-    },
-    setup = function()
-      local get_option = vim.filetype.get_option
-      vim.filetype.get_option = function(filetype, option)
-        return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
-      end
-    end,
-  },
+  'github/copilot.vim',
 
   -- Tmux & Neovim integration
   {
     'christoomey/vim-tmux-navigator',
     keys = { '<C-h>', '<C-j>', '<C-k>', '<C-l>' },
-  },
-  'github/copilot.vim',
-
-  -- LSP Plugins
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {
-      library = {
-        -- Load luvit types when the `vim.uv` word is found
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    },
-  },
-  { 'Bilal2453/luvit-meta', lazy = true },
-
-  -- Highlight todo, notes, etc in comments
-  {
-    'folke/todo-comments.nvim',
-    event = 'VimEnter',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = { signs = false },
-  },
-
-  -- Utility tool for LSPs
-  {
-    'nvimtools/none-ls.nvim',
-    config = function()
-      require('null-ls').setup()
-    end,
-    requires = { 'nvim-lua/plenary.nvim' },
   },
 
   require 'abdo.colors',
@@ -84,6 +40,7 @@ require('lazy').setup({
   require 'abdo.plugins.treesitter',
   require 'abdo.plugins.lint',
   require 'abdo.plugins.autopairs',
+  require 'abdo.plugins.comments',
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

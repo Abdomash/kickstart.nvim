@@ -19,3 +19,9 @@ local function open_neotree(data)
   vim.cmd 'Neotree toggle position=current'
 end
 vim.api.nvim_create_autocmd({ 'VimEnter' }, { callback = open_neotree })
+
+-- [[ Set up context-aware commenting ]]
+local get_option = vim.filetype.get_option
+vim.filetype.get_option = function(filetype, option)
+  return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring() or get_option(filetype, option)
+end
